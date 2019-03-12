@@ -12,7 +12,7 @@ const app = express();
 const mode = env || 'production';
 const PORT = process.env.PORT || 3000;
 
-app.use(express.static('../../public'));
+app.use(express.static(path.resolve(__dirname, '../../public')));
 
 // webpack hot middleware server for dev mode
 if (mode === 'development') {
