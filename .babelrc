@@ -5,5 +5,4 @@
     "react"
   ],
    "plugins": ["emotion", "transform-react-jsx"]
-
   }

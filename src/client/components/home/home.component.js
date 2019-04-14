@@ -7,6 +7,11 @@ import Button from 'commons/button/button.component.js';
 import styles from './home.styles';
 
 function Home(props) {
+
+  function handleButtonClick() {
+    props.history.push('/dashboard');
+  }
+
   return (
     <div css={styles.homeContainer}>
       <div css={styles.containerOne}>
@@ -16,6 +21,7 @@ function Home(props) {
         <Button 
           buttonText="Get Started"
           buttonStyle={styles.buttonStyle}
+          handleButtonClick={handleButtonClick}
         />
       </div>
       <div css={styles.containerTwo}>
