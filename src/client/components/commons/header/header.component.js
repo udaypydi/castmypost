@@ -6,7 +6,9 @@ import { jsx, css } from '@emotion/core';
 import styles from './header.styles';
 
 function Header(props) {
-  const [headerColor, setHeaderColor] = useState('transparent');
+  const [headerColor, setHeaderColor] = useState(props.headerColor);
+
+  const { changeHeaderColorOnScroll } = props;
 
   const scrollEventHandler = event => {
     if (window.scrollY> 50 && window.scrollY < window.screen.availHeight) {
@@ -19,7 +21,9 @@ function Header(props) {
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', scrollEventHandler)
+    if (changeHeaderColorOnScroll) {
+      window.addEventListener('scroll', scrollEventHandler);
+    }
     return () => {
       window.removeEventListener('scroll', scrollEventHandler)
     }
@@ -28,7 +32,7 @@ function Header(props) {
   return (
     <div css={styles.headerContainer} style={{ backgroundColor: headerColor }}>
         <p css={styles.companyName}>castmypost</p>
-        {props.headerElements && (
+        {props.showHeaderElements && (
            <div css={styles.headerElementsContainer}>
               <div css={styles.headerElement}>
                 <p>SIGNUP</p>
@@ -43,7 +47,13 @@ function Header(props) {
 }
 
 Header.propTypes = {
-  headerElements: PropTypes.bool.isRequired,
+  showHeaderElements: PropTypes.bool.isRequired,
+  changeHeaderColorOnScroll: PropTypes.bool.isRequired,
+  headerColor: PropTypes.string,
 };
+
+Header.defaultProps = {
+  headerColor: 'transparent',
+}
 
 export default Header;

@@ -9,7 +9,7 @@ import webpackConfig from '../../webpack.config';
 const app = express();
 
 // env config 
-const mode = env || 'production';
+const mode = env || 'development';
 const PORT = process.env.PORT || 3000;
 
 app.use(express.static(path.resolve(__dirname, '../../public')));

@@ -70,7 +70,8 @@ module.exports = {
     resolve: {
       alias: {
         commons: path.resolve(__dirname, 'src/client/components/commons/'),
-        components: path.resolve(__dirname, 'src/client/components/')
+        components: path.resolve(__dirname, 'src/client/components/'),
+        theme: path.resolve(__dirname, 'src/client/theme/')
       }
     },
 
