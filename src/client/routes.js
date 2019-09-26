@@ -7,6 +7,7 @@ import Header from 'commons/header/header.component';
 import Sidebar from 'commons/sidebar/sidebar.component';
 import FalbackRoute from 'components/notfound/fallback.component';
 import Dashboard from 'components/dashboard/dashboard.component';
+import AddAccount from 'components/addaccount/addaccount.component';
 
 
 const RouterDiv = styled.div`
@@ -24,6 +25,7 @@ const ComponentDiv = styled.div`
   margin-left: 260px;
   width: calc(100vw - 260px);
   height: 100vh;
+  background-color: ${colors.containerBackground}
 `
 
 const DefaultLayout = ({component: Component, common,  ...rest}) => {
@@ -35,7 +37,10 @@ const DefaultLayout = ({component: Component, common,  ...rest}) => {
               <Header 
                 changeHeaderColorOnScroll={false}
                 headerColor={colors.primaryColor}
+                headerColor='transparent'
+                headerText={common.headerText}
                 showHeaderElements 
+                isLoggedIn
               />
             )
           }
@@ -58,7 +63,8 @@ function AppRouter() {
     <Router>
       <div>
         <Route exact path="/" component={App} />
-        <DefaultLayout path="/dashboard" common={{ header: false, sidebar: true }} component={Dashboard} />
+        <DefaultLayout path="/dashboard" common={{ header: false, sidebar: true,  }} component={Dashboard} />
+        <DefaultLayout path="/add-account" common={{ header: true, sidebar: true, headerText: 'Add Social Accounts' }} component={AddAccount} />
         <Route path="/notfound" component={FalbackRoute} />
       </div>
     </Router>

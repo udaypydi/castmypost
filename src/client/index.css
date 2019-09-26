@@ -8,3 +8,20 @@ body {
   -ms-user-select: none;
   user-select: none;
 }
+
+.flex-row {
+  display: flex;
+}
+
+.flx-space-btwn {
+  justify-content: space-between !important;
+}
+
+.mr-50 {
+  margin-right: 50%;
+}
+
+.ml-10 {
+  margin-left: 10%;
+}
+

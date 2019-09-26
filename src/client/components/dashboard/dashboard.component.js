@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import Button from 'commons/button/defaultbutton.component';
+import { H3 } from 'commons/text/text.component';
 
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
@@ -11,11 +12,11 @@ function Dashboard(props) {
     <div css={dashboardStyles.container}>
       <div>
         <img 
-          style={{ height: 300 }}
+          style={{ height: 100 }}
           src="https://staticassets.gannettdigital.com/gci-static-assets/assets/global/static-web/device-icons@2x.png" 
         />
-        <h1>No Accounts Found</h1>
-        <Button>Get Started</Button>
+        <H3>No Accounts Found</H3>
+        <Button onClick={() => props.history.push('/add-account')}>Get Started</Button>
       </div>
     </div>
   )

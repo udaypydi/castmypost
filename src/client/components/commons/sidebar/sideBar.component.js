@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { css, jsx } from '@emotion/core';
 import Divider from 'commons/divider/divider.component';
 import sideBarStyles from './sideBar.styles';
+import { Paragraph } from 'commons/text/text.component';
 import { SIDEBAR_ELEMENTS } from './sideBar.constants';
 
 function SideBar(props) {
@@ -12,7 +13,8 @@ function SideBar(props) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   function setElementActive(index) {
-    setActiveIndex(index)
+    setActiveIndex(index);
+    props.history.push(SIDEBAR_ELEMENTS[index].route);
   }
 
   function renderSideBarChildren() {
@@ -22,7 +24,7 @@ function SideBar(props) {
         onClick={() => setElementActive(index)}
       >
         <div css={sideBarStyles.iconContainer}><element.icon color={ index === activeIndex ? '#ffffff': '#a9afbb' } /></div>
-        <p css={sideBarStyles.navigationElementText}>{element.title}</p>
+        <Paragraph css={sideBarStyles.navigationElementText}>{element.title}</Paragraph>
       </div>
      
     ));
@@ -32,16 +34,14 @@ function SideBar(props) {
     <div css={sideBarStyles.container}>
      
         <div css={sideBarStyles.logo}>
-          <p css={sideBarStyles.logoText}>CASTMYPOST</p>
+          <Paragraph css={sideBarStyles.logoText}>CASTMYPOST</Paragraph>
           <Divider />
         </div>
         <div css={sideBarStyles.sidebarWrapper}>
           <div css={sideBarStyles.navigationBar}>
             {renderSideBarChildren()}
           </div>
-          
         </div>
-      
     </div>
   )
 }
