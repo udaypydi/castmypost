@@ -3,10 +3,14 @@ import PropTypes from 'prop-types';
 
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
+import { HEADER_ICONS } from './header.constant';
+import { MutedText } from 'commons/text/text.component';
 import styles from './header.styles';
 
 function Header(props) {
-  const [headerColor, setHeaderColor] = useState('transparent');
+  const [headerColor, setHeaderColor] = useState(props.headerColor);
+
+  const { changeHeaderColorOnScroll } = props;
 
   const scrollEventHandler = event => {
     if (window.scrollY> 50 && window.scrollY < window.screen.availHeight) {
@@ -19,7 +23,9 @@ function Header(props) {
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', scrollEventHandler)
+    if (changeHeaderColorOnScroll) {
+      window.addEventListener('scroll', scrollEventHandler);
+    }
     return () => {
       window.removeEventListener('scroll', scrollEventHandler)
     }
@@ -28,7 +34,7 @@ function Header(props) {
   return (
     <div css={styles.headerContainer} style={{ backgroundColor: headerColor }}>
         <p css={styles.companyName}>castmypost</p>
-        {props.headerElements && (
+        {props.showHeaderElements && !props.isLoggedIn  && (
            <div css={styles.headerElementsContainer}>
               <div css={styles.headerElement}>
                 <p>SIGNUP</p>
@@ -38,12 +44,38 @@ function Header(props) {
               </div>
            </div>
         )}
+        {
+          props.isLoggedIn && (
+            <div css={styles.headerElementsContainer} className='flx-space-btwn'>
+              <MutedText className='ml-10'>{props.headerText.toUpperCase()}</MutedText>
+              <div className='flex-row'>
+                {
+                  HEADER_ICONS.map(header => (
+                    <div className='mr-50'>
+                      <header.icon color='#555555' fontSize='22px' />
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+          )
+        }
     </div>
   );
 }
 
 Header.propTypes = {
-  headerElements: PropTypes.bool.isRequired,
+  showHeaderElements: PropTypes.bool.isRequired,
+  changeHeaderColorOnScroll: PropTypes.bool.isRequired,
+  headerColor: PropTypes.string,
+  isLoggedIn: PropTypes.bool,
+  headerText: PropTypes.string,
 };
+
+Header.defaultProps = {
+  headerColor: 'transparent',
+  isLoggedIn: false,
+  headerText: '',
+}
 
 export default Header;
