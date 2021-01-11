@@ -23,7 +23,7 @@ const styles = {
   containerTwo: css`
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     text-align: center;
     margin: 0;

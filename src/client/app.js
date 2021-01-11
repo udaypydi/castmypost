@@ -7,9 +7,13 @@ const Home = React.lazy(() => import('./components/home/home.component'));
 
 function App() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <Home />
-    </Suspense>
+    <div>
+       <Header headerElements/>
+       <Suspense fallback={<div>Loading...</div>}>
+          <Home />
+        </Suspense>
+    </div>
+
   )
 }
 
